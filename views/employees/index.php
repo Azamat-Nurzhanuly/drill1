@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use yii\widgets\Pjax;
+use app\models\Employees;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\EmployeesSearch */
@@ -10,28 +12,30 @@ use yii\grid\GridView;
 $this->title = 'Employees';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="employees-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Employees', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+    <?= $this->render('_form', ['model' => $model]) ?>
 
-            'id',
-            'name:ntext',
-            'number:ntext',
-            'floor',
-            'cabinet',
-            // 'created_at',
+    <?php Pjax::begin(['id' => 'employeeGrid']) ?>
+        <?= GridView::widget([
+            'dataProvider' => $dataProvider,
+            'filterModel' => $searchModel,
+            'columns' => [
+                ['class' => 'yii\grid\SerialColumn'],
 
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
-    ]); ?>
+                'id',
+                'name:ntext',
+                'number:ntext',
+                'floor',
+                'cabinet',
+                'created_at',
+
+                ['class' => 'yii\grid\ActionColumn'],
+            ],
+        ]); ?>
+    <?php Pjax::end() ?>
 </div>

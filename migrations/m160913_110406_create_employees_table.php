@@ -25,7 +25,8 @@ class m160913_110406_create_employees_table extends Migration
             'number' => Schema::TYPE_TEXT,
             'floor' => Schema::TYPE_INTEGER,
             'cabinet' => Schema::TYPE_INTEGER,
-            'created_at' => Schema::TYPE_DATE,
+            'created_at' => Schema::TYPE_DATETIME,
+            'updated_at' => Schema::TYPE_DATETIME,
         ], $tableOptions);
     }
 
